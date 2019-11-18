@@ -16,6 +16,9 @@ fshift = np.fft.fftshift(fft2)
 
 # 在频域取d将其反变换到空间域
 def make_transform_matrix(d,image):
+    ''' 低通滤波器
+    d:半径
+    '''
     transfor_matrix = np.zeros(image.shape)
     center_point = tuple(map(lambda x:(x-1)/2, fshift.shape))
     for i in range(transfor_matrix.shape[0]):
@@ -41,18 +44,16 @@ img_d2 = np.abs(np.fft.ifft2(np.fft.ifftshift(fshift*d_2)))
 img_d3 = np.abs(np.fft.ifft2(np.fft.ifftshift(fshift*d_3)))
 
 plt.subplot(231),plt.imshow(img,'gray'),plt.title('origin')
-plt.subplot(232),plt.imshow(img_d1,'gray'),plt.title('d=10')
-plt.subplot(233),plt.imshow(img_d2,'gray'),plt.title('d=20')
-plt.subplot(234),plt.imshow(img_d3,'gray'),plt.title('d=50')
+plt.subplot(234),plt.imshow(img_d1,'gray'),plt.title('d=10')
+plt.subplot(235),plt.imshow(img_d2,'gray'),plt.title('d=20')
+plt.subplot(236),plt.imshow(img_d3,'gray'),plt.title('d=50')
 
-# # 对傅里叶变换的结果进行对数变换 目的是将数据变化到0~255
-# log_fft2 = np.log(1 + np.abs(fft2))
-# plt.subplot(235),plt.imshow(log_fft2,'gray'),plt.title('log_fft2')
-#
-# # 对中心化后的结果进行对数变换
-# log_shift2center = np.log(1 + np.abs(fshift))
-# plt.subplot(236),plt.imshow(log_shift2center,'gray'),plt.title('fshift')
-
+# 对傅里叶变换的结果进行对数变换 目的是将数据变化到0~255
+log_fft2 = np.log(1 + np.abs(fft2))
+plt.subplot(232),plt.imshow(log_fft2,'gray'),plt.title('log_fft2')
+# 对中心化后的结果进行对数变换
+log_shift2center = np.log(1 + np.abs(fshift))
+plt.subplot(233),plt.imshow(log_shift2center,'gray'),plt.title('log_shift2center')
 
 
 plt.show()

@@ -70,7 +70,15 @@ img_exp=exp_noise(img,10)
 img_salt_mean = cv2.blur(img_salt, (5,5))
 img_gauss_mean = cv2.blur(img_gauss, (5,5))
 img_exp_mean = cv2.blur(img_exp, (5,5))
+
 # 阿尔法均值滤波器
+# def alpha(img, kernel_size, d):
+#     for i in img.shape[0]-kernel_size:
+#         for j in img.shape[1]-kernel_size:
+
+
+# 自适应中值滤波器
+
 
 # 输出图像
 titles = ['origin', 'salt','gauss','exponential',
